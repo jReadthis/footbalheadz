@@ -2,39 +2,39 @@ package com.footballheadz.footballheadz.model;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
-@Table(name="OWNER")
+@Table(name = "owners")
 public class Owner {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
-    private List<Team> teams;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
     private String ownerName;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "team_id", referencedColumnName = "id")
+    private Team team;
 
     private Date activeSince;
 
     private boolean activeStatus;
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public List<Team> getTeams() {
-        return teams;
+    public Team getTeam() {
+        return team;
     }
 
-    public void setTeams(List<Team> teams) {
-        this.teams = teams;
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
     public String getOwnerName() {
