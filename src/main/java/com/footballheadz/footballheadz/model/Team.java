@@ -4,17 +4,17 @@ import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name="TEAM")
+@Table(name="teams")
 public class Team {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     private String teamName;
 
-    @ManyToOne
-    @JoinColumn(name = "owner_id", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "owner_id", referencedColumnName = "id")
     private Owner owner;
 
     private Date activeSince;
